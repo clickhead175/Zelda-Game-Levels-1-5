@@ -1,0 +1,176 @@
+body{
+    font-family: monospace,sans-serif;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: darkred;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.board{
+    display: flex;
+    gap: 40px;
+    margin: 20px;
+    color: white;
+}
+
+#grid{
+    width: 480px;
+    height: 430px;
+    box-shadow: 10px 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url('images/undefined\ -\ Imgur\(6\).png');
+    background-size: cover;
+    position: relative;
+    padding: 0;
+}
+
+.grid div{
+    height: 48px;
+    width: 48px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.explanation{
+    color: white;
+    margin: 30px;
+    font-weight: bold;
+}
+
+.level{
+    color: white;
+}
+
+
+.link-going-down, .link-going-up, .link-going-left, .link-going-right{
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    z-index: 10;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.link-going-up{
+    background-image: url('images/UkV0we0.png');
+}
+
+.link-going-down{
+    background-image: url('images/tVtlP6y.png');
+}
+
+.link-going-left{
+    background-image: url('images/1Xq9biB.png');
+}
+
+.link-going-right{
+    background-image: url('images/yZIb8O2.png');
+}
+
+.top-wall{
+    background-image: url('images/undefined\ -\ Imgur\(5\).png');
+}
+
+
+.left-wall{
+    background-image: url('images/SmHhgUn\ -\ Imgur.png');
+}
+
+
+.bottom-wall{
+    background-image: url('images/vWJWmvb\ -\ Imgur.png');
+}
+
+.lantern{
+    background-image: url('images/wiSiY09\ -\ Imgur.png');
+}
+
+
+.top-door{
+    background-image: url('images/U9nre4n\ -\ Imgur.png');
+}
+
+.center-door{
+    background-image: url('images/okdJNls\ -\ Imgur.png');
+}
+
+.right-wall{
+    background-image: url('images/UbfOlk-imgur\(6\).png');
+}
+
+.firepot{
+    background-image: url('images/undefined\ -\ Imgur\(2\).png');
+}
+
+.slicer, .skeletor{
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    z-index: 5;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.slicer{
+    background-image: url('images/c6JFi5Z\ -\ Imgur.png');
+}
+
+.skeletor{
+    background-image: url('images/undefined\ -\ Imgur\(1\).png');
+}
+
+.kaboom{
+    background-image: url('images/undefined\ -\ Imgur.png');
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    z-index: 14;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: 0.4s linear forwards;
+}
+
+.bottom-left-corner-wall{
+    background-image: url('images/undefined\ -\ Imgur\(4\).png');
+}
+
+.bottom-right-corner-wall{
+    background-image: url('images/undefined\ -\ Imgur\(3\).png');
+}
+
+.top-right-corner-wall{
+    background-image: url('images/z0OmBd1.jpg');
+}
+
+.top-left-corner-wall{
+    background-image: url('images/xlpUxIm\ -\ Imgur.png');
+}
+
+.stairs{
+    background-image: url('images/VghkL08.png');
+}
+
+#alertenemiesmessage{
+    position: absolute;
+    background-color: black;
+    top: 40%;
+    right: 20%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 300px;
+    text-shadow: 10px 10px 10px black;
+    flex-direction: column;
+    border-radius: 4px;
+}
