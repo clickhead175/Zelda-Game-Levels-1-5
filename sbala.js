@@ -9,7 +9,7 @@ const tileSize = 48;
 
 const squares = [];
 let score = 0;
-let level = 3; 
+let level = 0; 
 let playerposition = 66;
 let enemies = []
 let playerdirection = 'right';
