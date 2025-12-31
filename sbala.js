@@ -9,7 +9,7 @@ const tileSize = 48;
 
 const squares = [];
 let score = 0;
-let level = 2; 
+let level = 3; 
 let playerposition = 66;
 let enemies = []
 let playerdirection = 'right';
@@ -41,7 +41,7 @@ const maps = [
     // layout for level 2
     [
         'awwwwwwwwb',
-        'x   e    z',
+        'x   e  * z',
         'x  l     z',
         'x    $   z',
         'x      e z',
@@ -55,7 +55,7 @@ const maps = [
         'awwwwwwwwb',
         'x    * p z',
         'x  l     z',
-        'x        z',
+        'v        z',
         'x  $  *  z',
         'x     f  z',
         'x   e    z',
@@ -240,8 +240,8 @@ function moveplayer(direction){
 
     if(canmoveto(newposition)){
         const square = squares[newposition]
-        if(square.classList.contains('left-door')){
-            square.classList.remove('left-door')
+        if(square.classList.contains('center-door')){
+            square.classList.remove('center-door')
         }
         else if(square.classList.contains('top-door') || square.classList.contains('stairs')){
             if(enemies.length === 0){
@@ -252,17 +252,17 @@ function moveplayer(direction){
             }
             return
         }
+        playerposition = newposition
+        playerelements.style.left = `${(playerposition % gridwidth) * tileSize}px`
+        playerelements.style.top = `${Math.floor(playerposition / gridwidth) * tileSize}px`
+        checkPlayerenemycollision()
     }
-
-    playerposition = newposition
-    playerelements.style.left = `${(playerposition % gridwidth) * tileSize}px`
-    playerelements.style.top = `${Math.floor(playerposition / gridwidth) * tileSize}px`
-    checkPlayerenemycollision()
+    
 }
 
-function canmoveto(position){
-    if(position < 0 || position >= squares.length) return false
-    const square = squares[position]
+function canmoveto(newposition){
+    if(newposition < 0 || newposition >= squares.length) return false
+    const square = squares[newposition]
 
     return  !square.classList.contains('left-wall') &&
             !square.classList.contains('right-wall') &&
@@ -306,7 +306,7 @@ function kaboomtokill(){
         if(kaboomelements.parentNode){
             kaboomelements.parentNode.removeChild(kaboomelements)
         }
-    }, 1000)
+    }, 800)
     }
 }
 
@@ -349,84 +349,6 @@ function nextlevel(){
     createGrid()
 }
 
-function alertmessage(){
-    grid.style.filter = `hue-rotate(0deg) saturate(2) brightness(1.6)`
-    grid.style.boxShadow = `0px 10px 10px 10px`
-     
-    setTimeout(()=> {
-        grid.style.filter =''
-        grid.style.boxShadow = ''
-    }, 400)
-
-    messagefor('Defeat all enemies to continue to next level!', 'green', 2000)
-}
-
-function messagefor(text,color,duration){
-    const existingmessage = document.getElementById('alertenemiesmessage')
-    if(existingmessage) existingmessage.remove()
-    const messageelement = document.createElement('div')
-    messageelement.id = 'alertenemiesmessage'
-    messageelement.innerHTML = text
-    messageelement.style.color = color
-    grid.appendChild(messageelement)
-
-    setTimeout(()=> {
-        if(messageelement.parentNode){
-            messageelement.remove()
-        }
-    }, duration)
-}
-
-
-
-
-
-
-document.addEventListener('keydown',(event)=> {
-    if(!gamerunning) return
-
-        switch(event.code){
-            case 'ArrowLeft':
-                event.preventDefault()
-            moveplayer('left')
-            break;
-            case 'ArrowRight':
-                event.preventDefault()
-                moveplayer('right')
-                break;
-        case 'ArrowUp':
-            event.preventDefault()
-            moveplayer('up')
-            break;
-        case 'ArrowDown':
-            event.preventDefault()
-            moveplayer('down')
-            break;
-        case 'Space':
-            event.preventDefault()
-            kaboomtokill()
-            break;
-    }
-})
-
-
-
-
-
-let lastTime = 0
-let animationId
-
-
-function gameloop(currenttime){
-    const deltatime = (currenttime - lastTime) / 1000
-    lastTime = currenttime 
-    if(gamerunning && deltatime < 0.1){
-        moveenemies(deltatime)
-        checkPlayerenemycollision()
-    }
-    animationId = requestAnimationFrame(gameloop)
-}
-
 
 function moveenemies(deltatime){
     for(const enemieselement of enemies){
@@ -438,20 +360,6 @@ function moveenemies(deltatime){
         }
     }
 }
-
-
-function gameover(){
-    gamerunning = false
-    showendmessage(`Game Over! Final score is ${score}`, 'red', 3000)
-}
-
-function showendmessage(finalmessage, color, duration){
-    const gameoverelement = document.createElement('div')
-    gameoverelement.id = 'finaltextmessage'
-    gameoverelement.innerHTML = finalmessage
-    gameoverelement.style.color = color
-}
-
 
 function moveslicer(slicer, deltatime){
     const speed = 2 * deltatime
@@ -510,8 +418,89 @@ function updateboard(){
 }
 
 
+
+function alertmessage(){
+    grid.style.filter = `hue-rotate(0deg) saturate(2) brightness(1.6)`
+    grid.style.boxShadow = `0px 10px 10px 10px`
+     
+    setTimeout(()=> {
+        grid.style.filter =''
+        grid.style.boxShadow = ''
+    }, 400)
+
+    messagefor('Defeat all enemies to continue to next level!', 'green', 2000)
+}
+
+
+
+function messagefor(text,color,duration){
+    const existingmessage = document.getElementById('alertenemiesmessage')
+    if(existingmessage) existingmessage.remove()
+    const messageelement = document.createElement('div')
+    messageelement.id = 'alertenemiesmessage'
+    messageelement.innerHTML = text
+    messageelement.style.color = color
+    grid.appendChild(messageelement)
+
+    setTimeout(()=> {
+        if(messageelement.parentNode){
+            messageelement.remove()
+        }
+    }, duration)
+}
+
+
+document.addEventListener('keydown',(event)=> {
+    if(!gamerunning) return
+
+        switch(event.code){
+            case 'ArrowLeft':
+                event.preventDefault()
+            moveplayer('left')
+            break;
+            case 'ArrowRight':
+                event.preventDefault()
+                moveplayer('right')
+                break;
+        case 'ArrowUp':
+            event.preventDefault()
+            moveplayer('up')
+            break;
+        case 'ArrowDown':
+            event.preventDefault()
+            moveplayer('down')
+            break;
+        case 'Space':
+            event.preventDefault()
+            kaboomtokill()
+            break;
+    }
+})
+
+
+let lastTime = 0
+let animationId
+
+function gameloop(currenttime){
+    const deltatime = (currenttime - lastTime) / 1000
+    lastTime = currenttime 
+    if(gamerunning && deltatime < 0.1){
+        moveenemies(deltatime)
+        checkPlayerenemycollision()
+    }
+    animationId = requestAnimationFrame(gameloop)
+}
+
+function gameover(){
+    gamerunning = false
+    messagefor(`Game Over! Final score is ${score}`, 'red', 3000)
+}
+
 createGrid()
 animationId = requestAnimationFrame(gameloop)
 });
+
+
+
 
 
