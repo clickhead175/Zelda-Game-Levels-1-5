@@ -28,7 +28,7 @@ let gamerunning = true;
 // * = slicer enemy
 const maps = [
     [
-        'awwwlwwww^',
+        'awwwlwww^w',
         'x      $ z',
         'x        z',
         'x   f    z',
