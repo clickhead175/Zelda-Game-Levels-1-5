@@ -27,6 +27,7 @@ let gamerunning = true;
 // s = emptyspacearea
 // $ = skeletor enemy
 // * = slicer enemy
+    
 const maps = [
     [
         'awwwlwww^w',
