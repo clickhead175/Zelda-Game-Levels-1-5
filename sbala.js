@@ -14,7 +14,6 @@ let playerposition = 66;
 let enemies = []
 let playerdirection = 'right';
 let gamerunning = true;
-    
 // w = topwall, x = rightwall, y = bottomwall, z = leftwall, 
 // cornerwalls = a,b,c,d,
 // p = player,
