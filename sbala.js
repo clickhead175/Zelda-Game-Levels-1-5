@@ -495,7 +495,6 @@ function gameover(){
     gamerunning = false
     messagefor(`Game Over! Final score is ${score}`, 'red', 3000)
 }
-
 createGrid()
 animationId = requestAnimationFrame(gameloop)
 });
