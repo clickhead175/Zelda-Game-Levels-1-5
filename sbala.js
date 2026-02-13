@@ -7,6 +7,7 @@ const enemiesDisplay = document.querySelector('.enemies');
 const gridwidth = 10;
 const tileSize = 48;
 
+    
 const squares = [];
 let score = 0;
 let level = 0; 
