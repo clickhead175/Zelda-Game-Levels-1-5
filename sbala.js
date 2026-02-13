@@ -4,6 +4,7 @@ const scoreDisplay = document.querySelector('.score');
 const levelDisplay = document.querySelector('.level');
 const enemiesDisplay = document.querySelector('.enemies');
 
+    
 const gridwidth = 10;
 const tileSize = 48;
 
